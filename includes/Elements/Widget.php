@@ -45,7 +45,7 @@ class Elementor_Elements_Widget extends \Elementor\Widget_Base
 	 */
 	public function get_title()
 	{
-		return esc_html__('EEA Embed', 'elementor-oembed-widget');
+		return esc_html__('EEA Widget', 'elementor-oembed-widget');
 	}
 
 	/**
