@@ -1,0 +1,2 @@
+<# view.addRenderAttribute( 'wrapper' , { 'id' : 'custom-widget-id' , 'class' : [ 'elementor-tab-title' , settings.custom_class ], 'role' : settings.role, 'aria-label' : settings.name, } ); #>
+    <h1 {{{ view.getRenderAttributeString( 'wrapper' ) }}}>{{{title}}}</h1>

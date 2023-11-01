@@ -77,7 +77,7 @@ function editor_enqueue_scripts()
     wp_enqueue_style(
         'box-icons',
         // EEA_PLUGIN_URL . 'assets/admin/css/eaicon.css',
-        "https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css",
+        "https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css",
         false,
         EEA_PLUGIN_VERSION
     );
@@ -139,5 +139,66 @@ if (!function_exists("elementor_add_eea_widget_categories")) {
             ],
             1
         );
+    }
+}
+
+if (!function_exists("eea_elements")) {
+    function eea_elements($template, $class, array $settings = [])
+    {
+        $ext = substr($template, -4);
+        $path = null;
+        if ($ext == ".php" && file_exists(EEA_PLUGIN_PATH . "templates/elements/$template")) {
+            $path = EEA_PLUGIN_PATH . "templates/elements/$template";
+        }
+
+        if ($path == null) {
+            if (file_exists(EEA_PLUGIN_PATH . "templates/elements/{$template}.php")) {
+                $path = EEA_PLUGIN_PATH . "templates/elements/{$template}.php";
+            } elseif (file_exists(EEA_PLUGIN_PATH . "templates/elements/{$template}/index.php")) {
+                $path = EEA_PLUGIN_PATH . "templates/elements/{$template}/index.php";
+            } elseif (file_exists(EEA_PLUGIN_PATH . "templates/elements/default.php")) {
+                $path = EEA_PLUGIN_PATH . "templates/elements/default.php";
+            }
+        }
+
+        ob_start();
+        if ($path) {
+            require_once $path;
+        }
+        $output = ob_get_contents();
+        ob_end_clean();
+
+        echo "<div class='oembed-elementor-widget'>$output</div>";
+    }
+}
+
+
+if (!function_exists("eea_contents")) {
+    function eea_contents($template, $class = null, array $settings = [])
+    {
+        $ext = substr($template, -4);
+        $path = null;
+        if ($ext == ".php" && file_exists(EEA_PLUGIN_PATH . "templates/contents/$template")) {
+            $path = EEA_PLUGIN_PATH . "templates/contents/$template";
+        }
+
+        if ($path == null) {
+            if (file_exists(EEA_PLUGIN_PATH . "templates/contents/{$template}.php")) {
+                $path = EEA_PLUGIN_PATH . "templates/contents/{$template}.php";
+            } elseif (file_exists(EEA_PLUGIN_PATH . "templates/contents/{$template}/index.php")) {
+                $path = EEA_PLUGIN_PATH . "templates/contents/{$template}/index.php";
+            } elseif (file_exists(EEA_PLUGIN_PATH . "templates/contents/default.php")) {
+                $path = EEA_PLUGIN_PATH . "templates/contents/default.php";
+            }
+        }
+
+        ob_start();
+        if ($path) {
+            require_once $path;
+        }
+        $output = ob_get_contents();
+        ob_end_clean();
+
+        echo "<div class='oembed-elementor-widget'>$output</div>";
     }
 }

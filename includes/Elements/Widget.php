@@ -20,6 +20,23 @@ namespace AwesomeCoder\Elements;
 class Elementor_Elements_Widget extends \Elementor\Widget_Base
 {
 
+	public function __construct($data = [], $args = null)
+	{
+		parent::__construct($data, $args);
+	}
+
+
+	// public function get_script_depends()
+	// {
+	// 	return ['script-handle'];
+	// }
+
+	// public function get_style_depends()
+	// {
+	// 	return ['style-handle'];
+	// }
+
+
 	/**
 	 * Get widget name.
 	 *
@@ -178,15 +195,22 @@ class Elementor_Elements_Widget extends \Elementor\Widget_Base
 				'options' => [
 					'left' => [
 						'title' => esc_html__('Left', EEA_PLUGIN_TEXTDOMAIN),
-						'icon' => 'eicon-text-align-left',
+						// 'icon' => 'eicon-text-align-left',
+						'icon' => 'bx bxs-objects-horizontal-left'
 					],
 					'center' => [
 						'title' => esc_html__('Center', EEA_PLUGIN_TEXTDOMAIN),
-						'icon' => 'eicon-text-align-center',
+						// 'icon' => 'eicon-text-align-center',
+						'icon' => 'bx bxs-objects-horizontal-center'
+					],
+					'middle' => [
+						'title' => esc_html__('Middle', EEA_PLUGIN_TEXTDOMAIN),
+						'icon' => 'bx bxs-zap',
 					],
 					'right' => [
 						'title' => esc_html__('Right', EEA_PLUGIN_TEXTDOMAIN),
-						'icon' => 'eicon-text-align-right',
+						// 'icon' => 'eicon-text-align-right',
+						'icon' => 'bx bxs-objects-horizontal-right'
 					],
 				],
 				'default' => 'center',
@@ -198,7 +222,7 @@ class Elementor_Elements_Widget extends \Elementor\Widget_Base
 		$this->start_controls_section(
 			'section_style',
 			[
-				'label' => esc_html__('Style', 'textdomain'),
+				'label' => __('<i class="bx bxs-bolt" ></i> Style', EEA_PLUGIN_TEXTDOMAIN),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -206,11 +230,11 @@ class Elementor_Elements_Widget extends \Elementor\Widget_Base
 		$this->add_control(
 			'color',
 			[
-				'label' => esc_html__('Color', 'textdomain'),
+				'label' => esc_html__('Color', EEA_PLUGIN_TEXTDOMAIN),
 				'type' => \Elementor\Controls_Manager::COLOR,
-				'default' => '#f00',
+				'default' => '#fde047',
 				'selectors' => [
-					'{{WRAPPER}} h3' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .eea-widget-heading' => 'color: {{VALUE}} !important;',
 				],
 			]
 		);
@@ -218,7 +242,7 @@ class Elementor_Elements_Widget extends \Elementor\Widget_Base
 		$this->add_control(
 			'image',
 			[
-				'label' => __('<i class="eea bx bx-link" ></i> Choose Image', 'textdomain'),
+				'label' => esc_html__('Choose Image', EEA_PLUGIN_TEXTDOMAIN),
 				'type' => \Elementor\Controls_Manager::MEDIA,
 				'default' => [
 					'url' => \Elementor\Utils::get_placeholder_image_src(),
@@ -239,17 +263,17 @@ class Elementor_Elements_Widget extends \Elementor\Widget_Base
 	protected function render()
 	{
 		$settings = $this->get_settings_for_display();
+		$this->add_render_attribute(
+			'title',
+			[
+				'id' => 'custom-widget-id',
+				'class' => ['custom-widget-wrapper-class eea-widget-heading', $settings['color']],
+				'role' => $settings['title'],
+				'aria-label' => $settings['image'],
+			]
+		);
 
-		echo '<div class="oembed-elementor-widget">';
-		echo '<h3>' . $settings['title'] . '</h3>';
-
-		// Get image url
-		echo '<img src="' . esc_url($settings['image']['url']) . '" alt="">';
-
-		// Get image by id
-		echo wp_get_attachment_image($settings['image']['id'], 'thumbnail');
-		echo json_encode($settings, JSON_PRETTY_PRINT);
-		echo '</div>';
+		eea_elements("element", $this, $settings);
 	}
 	/**
 	 * Render oEmbed widget output on the frontend.
@@ -259,11 +283,9 @@ class Elementor_Elements_Widget extends \Elementor\Widget_Base
 	 * @since 1.0.0
 	 * @access protected
 	 */
-	protected function content_template()
-	{
-?>
-		<h3>{{{ settings.title }}}</h3>
-		<img src="{{{ settings.image.url }}}">
-<?php
-	}
+	// protected function content_template()
+	// {
+	// 	// $settings = $this->get_settings_for_display();
+	// 	eea_contents("element");
+	// }
 }
