@@ -1,0 +1,29 @@
+.elementor-element-wrapper:not(.elementor-element--promotion)
+	[class^="eea-"]:after,
+.elementor-element-wrapper:not(.elementor-element--promotion)
+	[class*="eea-"]:after {
+	content: "\ecd1" !important;
+	position: absolute !important;
+	top: 6px !important;
+	right: 6px !important;
+	/* color: #cdcfd2 !important; */
+	color: #fde047 !important;
+	speak: none !important;
+	font-size: 14px !important;
+	font-style: normal !important;
+	font-weight: normal !important;
+	font-variant: normal !important;
+	text-transform: none !important;
+	line-height: 1 !important;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-family: boxicons !important;
+	text-rendering: auto !important;
+	display: inline-block !important;
+	text-transform: none !important;
+	-webkit-font-smoothing: antialiased;
+}
+
+.eea {
+	color: #fde047 !important;
+}
