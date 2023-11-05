@@ -102,19 +102,33 @@ function editor_enqueue_scripts()
  * @return void
  */
 
-add_action('elementor/widgets/register', fn($e) => call_user_func("do_action", 'eea/register', $e));
-$classes = [
-   "\AwesomeCoder\Elements\Elementor_Elements_Widget",
-   "\AwesomeCoder\Elements\Career_Page",
-];
+final class Elements
+{
+    protected $elements = [];
 
-add_action("eea/register", function ($instance) use($classes) {
-    require_once(EEA_PLUGIN_PATH . 'includes/Elements/Widget.php');
-    require_once(EEA_PLUGIN_PATH . 'includes/Elements/Career_Page.php');
-    foreach ($classes as $key => $class) {
-        call_user_func([$instance,"register"],new $class());
+    function __construct()
+    {
+        add_action('elementor/widgets/register', fn($e) => call_user_func("do_action", 'eea/register', $e));
+
+        $this->elements = [
+            "\AwesomeCoder\Elements\Widget",
+            "\AwesomeCoder\Elements\Career_Page",
+        ];
+
+        add_action("eea/register",[$this,"widgets"]);
     }
-});
+
+
+    public function widgets ($instance)  {
+        foreach ($this->elements as $key => $class) {
+            \call_user_func([$instance,"register"],new $class());
+        }
+    }
+
+
+}
+new Elements();
+
 
 
 /**
