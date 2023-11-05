@@ -1,2 +1,11 @@
-<# view.addRenderAttribute( 'wrapper' , { 'id' : 'custom-widget-id' , 'class' : [ 'elementor-tab-title' , settings.custom_class ], 'role' : settings.role, 'aria-label' : settings.name, } ); #>
-    <h1 {{{ view.getRenderAttributeString( 'wrapper' ) }}}>{{{title}}}</h1>
+<#
+    view.addRenderAttribute('wrapper' ,{
+        'id' : 'custom-widget-id' ,
+        'class' : [ 'custom-widget-wrapper-class eea-widget-heading' , settings.custom_class ],
+        'role' : settings.role,
+        'aria-label' : settings.name,
+    });
+
+    view.addInlineEditingAttributes( 'text' , 'none' );
+#>
+    <h1 {{{ view.getRenderAttributeString( 'title' ) }}}>{{{settings.title}}}</h1>

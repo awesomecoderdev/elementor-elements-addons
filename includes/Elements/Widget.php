@@ -273,6 +273,8 @@ class Elementor_Elements_Widget extends \Elementor\Widget_Base
 			]
 		);
 
+		$this->add_inline_editing_attributes('title', 'advanced');
+
 		eea_elements("element", $this, $settings);
 	}
 	/**
@@ -283,9 +285,9 @@ class Elementor_Elements_Widget extends \Elementor\Widget_Base
 	 * @since 1.0.0
 	 * @access protected
 	 */
-	// protected function content_template()
-	// {
-	// 	// $settings = $this->get_settings_for_display();
-	// 	eea_contents("element");
-	// }
+	protected function content_template()
+	{
+		// $settings = $this->get_settings_for_display();
+		eea_contents("element");
+	}
 }
