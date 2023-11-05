@@ -118,14 +118,11 @@ final class Elements
         add_action("eea/register",[$this,"widgets"]);
     }
 
-
     public function widgets ($instance)  {
         foreach ($this->elements as $key => $class) {
-            \call_user_func([$instance,"register"],new $class());
+            class_exists($class) && \call_user_func([$instance,"register"],new $class());
         }
     }
-
-
 }
 new Elements();
 
