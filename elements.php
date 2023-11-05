@@ -92,7 +92,6 @@ function editor_enqueue_scripts()
 }
 
 
-
 /**
  * Register New Widget.
  *
@@ -102,14 +101,21 @@ function editor_enqueue_scripts()
  * @param \Elementor\Widgets_Manager $widget Elementor widgets manager.
  * @return void
  */
-add_action('elementor/widgets/register', 'register_eea_widget');
-if (!function_exists("register_eea_widget")) {
-    function register_eea_widget($widget = null)
-    {
-        require_once(EEA_PLUGIN_PATH . 'includes/Elements/Widget.php');
-        $widget?->register(new \AwesomeCoder\Elements\Elementor_Elements_Widget());
+
+add_action('elementor/widgets/register', fn($e) => call_user_func("do_action", 'eea/register', $e));
+$classes = [
+   "\AwesomeCoder\Elements\Elementor_Elements_Widget",
+   "\AwesomeCoder\Elements\Career_Page",
+];
+
+add_action("eea/register", function ($instance) use($classes) {
+    require_once(EEA_PLUGIN_PATH . 'includes/Elements/Widget.php');
+    require_once(EEA_PLUGIN_PATH . 'includes/Elements/Career_Page.php');
+    foreach ($classes as $key => $class) {
+        call_user_func([$instance,"register"],new $class());
     }
-}
+});
+
 
 /**
  * Register New Widget.
