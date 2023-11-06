@@ -9,8 +9,8 @@ use ArrayIterator;
 use AwesomeCoder\Traits\Macroable;
 use AwesomeCoder\Support\Enumerable;
 use AwesomeCoder\Traits\EnumeratesValues;
-use Illuminate\Exception\ItemNotFoundException;
-use Illuminate\Exception\MultipleItemsFoundException;
+use AwesomeCoder\Exception\ItemNotFoundException;
+use AwesomeCoder\Exception\MultipleItemsFoundException;
 use AwesomeCoder\Interface\CanBeEscapedWhenCastToString;
 /**
  * @template TKey of array-key

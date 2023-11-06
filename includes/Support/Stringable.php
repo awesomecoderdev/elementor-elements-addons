@@ -9,7 +9,7 @@ use function class_basename;
 use AwesomeCoder\Support\Str;
 
 use AwesomeCoder\Traits\Macroable;
-use Illuminate\Support\HtmlString;
+use AwesomeCoder\Support\HtmlString;
 
 class Stringable implements JsonSerializable, ArrayAccess
 {

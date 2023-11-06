@@ -270,13 +270,15 @@ $collection = new Collection([
     ['name' => 'Eve', 'age' => 28],
 ]);
 
-$filteredCollection = $collection->filter(function ($item) {
-    return $item['age'] >= 30;
-});
+// $filteredCollection = $collection->filter(function ($item) {
+//     return $item['age'] >= 30;
+// });
+
+$filteredCollection = $collection->sortBy("age");
 
 echo "<pre>";
 print_r($collection);
-print_r($filteredCollection);
+print_r($filteredCollection->toArray());
 echo "</pre>";
 
 
