@@ -1,6 +1,6 @@
 <?php
 
-namespace AwesomeCoder\Utils;
+namespace AwesomeCoder\Support;
 
 use AwesomeCoder\Core\Module;
 use AwesomeCoder\Core\Platform;

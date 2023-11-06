@@ -274,8 +274,8 @@ class Widget extends \Elementor\Widget_Base
 		);
 
 		$this->add_inline_editing_attributes('title', 'advanced');
-
-		eea_elements("element", $this, $settings);
+		// echo __NAMESPACE__;
+		// eea_elements("element", $this, $settings);
 	}
 	/**
 	 * Render oEmbed widget output on the frontend.

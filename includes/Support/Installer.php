@@ -1,17 +1,17 @@
 <?php
-namespace AwesomeCoder\Utils;
+namespace AwesomeCoder\Support;
 
 use WP_Error;
 use Plugin_Upgrader;
 use WP_Filesystem_Base;
-use function wp_unslash;
+use WP_Ajax_Upgrader_Skin;
+use AwesomeCoder\Support\Helper;
 
+use function wp_unslash;
 use function is_wp_error;
 use function plugins_api;
 use function sanitize_key;
-use WP_Ajax_Upgrader_Skin;
 use function activate_plugin;
-use AwesomeCoder\Utils\Helper;
 use function current_user_can;
 use function is_plugin_inactive;
 use function wp_remote_retrieve_body;

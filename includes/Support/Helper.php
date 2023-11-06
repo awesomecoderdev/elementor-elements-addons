@@ -1,5 +1,5 @@
 <?php
-namespace AwesomeCoder\Utils;
+namespace AwesomeCoder\Support;
 
 use WP_Error;
 use WP_REST_Response;

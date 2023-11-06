@@ -1,5 +1,5 @@
 <?php
-namespace AwesomeCoder\Utils;
+namespace AwesomeCoder\Support;
 
 class Enqueue extends Base {
     private $plugin_url;

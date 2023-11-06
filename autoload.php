@@ -19,37 +19,6 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
-// spl_autoload_register(function ($class) {
-//     // project-specific namespace prefix
-//     $prefix = 'AwesomeCoder\\';
-
-//     // base directory for the namespace prefix
-//     $base = EEA_PLUGIN_PATH . "/includes/";
-
-//     // does the class use the namespace prefix?
-//     $len = strlen($prefix);
-//     if (strncmp($prefix, $class, $len) !== 0) {
-//         // no, move to the next registered autoloader
-//         return;
-//     }
-
-//     // get the relative class name
-//     $classes = substr($class, $len);
-
-//     // replace the namespace prefix with the base directory, replace namespace
-//     // separators with directory separators in the relative class name, append
-//     // with .php
-//     $file = $base . str_replace('\\', '/', $classes) . '.php';
-//     die($file);
-//     // if the file exists, require it
-//     // if (file_exists($file)) {
-//     //     require $file;
-//     // }
-// });
-
-// die("asdf");
-
-
 spl_autoload_register(function ($class) {
 
     // project-specific namespace prefix

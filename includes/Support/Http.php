@@ -1,5 +1,5 @@
 <?php
-namespace AwesomeCoder\Utils;
+namespace AwesomeCoder\Support;
 
 use WP_Error;
 use AwesomeCoder\API\Login;

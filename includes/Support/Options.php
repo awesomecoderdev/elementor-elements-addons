@@ -1,6 +1,6 @@
 <?php
 
-namespace AwesomeCoder\Utils;
+namespace AwesomeCoder\Support;
 
 use function get_option;
 use function update_option;
@@ -8,7 +8,7 @@ use function get_user_meta;
 use function update_user_meta;
 use function get_current_user_id;
 
-class Options extends Base {
+class Options {
 	/**
 	 * Current User Id
 	 * @var integer
