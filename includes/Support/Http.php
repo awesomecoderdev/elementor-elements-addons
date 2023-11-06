@@ -3,7 +3,7 @@ namespace AwesomeCoder\Support;
 
 use WP_Error;
 use AwesomeCoder\API\Login;
-use AwesomeCoder\Utils\Helper;
+use AwesomeCoder\Support\Helper;
 
 class Http extends Base {
     /**
