@@ -33,6 +33,8 @@
  *
  */
 
+use AwesomeCoder\Support\Collection;
+
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) {
     exit;
@@ -123,9 +125,48 @@ final class Elements
             class_exists($class) && \call_user_func([$instance,"register"],new $class());
         }
     }
+
+    private $bindings = [];
+
+    public function bind($key, $concrete) {
+        $this->bindings[$key] = $concrete;
+    }
+
+    public function make($key) {
+        if (isset($this->bindings[$key])) {
+            $concrete = $this->bindings[$key];
+
+            if (is_callable($concrete)) {
+                return $concrete();
+            }
+
+            // Handle other types of bindings here, like class instantiation
+            // ...
+
+            return $concrete;
+        }
+
+        throw new Exception("Binding not found for: $key");
+    }
+
+    public function __get($property) {
+        return $this->make($property);
+    }
 }
 new Elements();
 
+
+// $container = new Container();
+
+// // Bind a closure to a key
+// $container->bind('greeting', function () {
+//     return 'Hello, World!';
+// });
+
+// // Access the 'greeting' method directly as if it were a property
+// $greeting = $container->greeting;
+
+// echo $greeting; // Outputs: Hello, World!
 
 
 /**
@@ -221,3 +262,22 @@ if (!function_exists("eea_contents")) {
         echo "<div class='oembed-elementor-widget'>$output</div>";
     }
 }
+
+$collection = new Collection([
+    ['name' => 'John', 'age' => 30],
+    ['name' => 'Alice', 'age' => 25],
+    ['name' => 'Bob', 'age' => 35],
+    ['name' => 'Eve', 'age' => 28],
+]);
+
+$filteredCollection = $collection->filter(function ($item) {
+    return $item['age'] >= 30;
+});
+
+echo "<pre>";
+print_r($collection);
+print_r($filteredCollection);
+echo "</pre>";
+
+
+die();
