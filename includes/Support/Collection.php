@@ -1384,8 +1384,7 @@ class Collection implements ArrayAccess, CanBeEscapedWhenCastToString, Enumerabl
             $results[$key] = $callback($value, $key);
         }
 
-        $descending ? arsort($results, $options)
-            : asort($results, $options);
+        $descending ? arsort($results, $options) : asort($results, $options);
 
         // Once we have sorted all of the keys in the array, we will loop through them
         // and grab the corresponding model so we can set the underlying items list

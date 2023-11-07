@@ -30,14 +30,6 @@ interface Plugin extends Container
     public function publicPath($path = '');
 
     /**
-     * Get the path to the storage directory.
-     *
-     * @param  string  $path
-     * @return string
-     */
-    public function storagePath($path = '');
-
-    /**
      * Register a service provider with the application.
      *
      * @param  \AwesomeCoder\Support\ServiceProvider|string  $provider

@@ -7,6 +7,7 @@ use Throwable;
 use Traversable;
 use JsonException;
 use AwesomeCoder\Traits\Macroable;
+use AwesomeCoder\Support\Collection;
 use AwesomeCoder\Support\Stringable;
 
 class Str
@@ -668,6 +669,25 @@ class Str
     }
 
     /**
+     * Get the string matching the given pattern.
+     *
+     * @param  string  $pattern
+     * @param  string  $subject
+     * @return \AwesomeCoder\Support\Collection
+     */
+    public static function matchAll($pattern, $subject)
+    {
+        preg_match_all($pattern, $subject, $matches);
+
+        if (empty($matches[0])) {
+            return new Collection();
+        }
+
+        return new Collection($matches[1] ?? $matches[0]);
+    }
+
+
+    /**
      * Pad both sides of a string with another.
      *
      * @param  string  $value
@@ -851,6 +871,31 @@ class Str
     }
 
     /**
+     * Replace a given value in the string sequentially with an array.
+     *
+     * @param  string  $search
+     * @param  iterable<string>  $replace
+     * @param  string  $subject
+     * @return string
+     */
+    public static function replaceArray($search, $replace, $subject)
+    {
+        if ($replace instanceof Traversable) {
+            $replace = (new Collection($replace))->all();
+        }
+
+        $segments = explode($search, $subject);
+
+        $result = array_shift($segments);
+
+        foreach ($segments as $segment) {
+            $result .= self::toStringOr(array_shift($replace) ?? $search, $search) . $segment;
+        }
+
+        return $result;
+    }
+
+    /**
      * Convert the given value to a string or return the given fallback on failure.
      *
      * @param  mixed  $value
@@ -877,6 +922,18 @@ class Str
      */
     public static function replace($search, $replace, $subject, $caseSensitive = true)
     {
+        if ($search instanceof Traversable) {
+            $search = (new Collection($search))->all();
+        }
+
+        if ($replace instanceof Traversable) {
+            $replace = (new Collection($replace))->all();
+        }
+
+        if ($subject instanceof Traversable) {
+            $subject = (new Collection($subject))->all();
+        }
+
         return $caseSensitive
             ? str_replace($search, $replace, $subject)
             : str_ireplace($search, $replace, $subject);
@@ -988,6 +1045,10 @@ class Str
      */
     public static function remove($search, $subject, $caseSensitive = true)
     {
+        if ($search instanceof Traversable) {
+            $search = (new Collection($search))->all();
+        }
+
         return $caseSensitive
             ? str_replace($search, '', $subject)
             : str_ireplace($search, '', $subject);

@@ -33,6 +33,10 @@
  *
  */
 
+use AwesomeCoder\Support\Arr;
+use AwesomeCoder\Support\Util;
+use AwesomeCoder\Support\Helper;
+use AwesomeCoder\Container\Plugin;
 use AwesomeCoder\Support\Collection;
 
 // If this file is called directly, abort.
@@ -45,7 +49,6 @@ if (!defined('ABSPATH')) {
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
-
 
 /**
  * Currently plugin constants.
@@ -68,8 +71,10 @@ if (file_exists(EEA_PLUGIN_PATH . "autoload.php")) {
     require_once  EEA_PLUGIN_PATH . "autoload.php";
 }
 
+new Plugin();
+
 // Enqueue
-// add_action('eael/before_enqueue_styles', 'before_enqueue_styles');
+// add_action('eea/before_enqueue_styles', 'before_enqueue_styles');
 add_action('elementor/editor/before_enqueue_scripts', 'editor_enqueue_scripts');
 // add_action('elementor/frontend/before_register_scripts', 'frontend_enqueue_scripts');
 // editor styles
@@ -182,7 +187,6 @@ add_action('elementor/elements/categories_registered', 'elementor_add_eea_widget
 if (!function_exists("elementor_add_eea_widget_categories")) {
     function elementor_add_eea_widget_categories($elements_manager)
     {
-
         // $elementor->add_category(
         //     'eea',
         //     [
@@ -263,23 +267,29 @@ if (!function_exists("eea_contents")) {
     }
 }
 
-$collection = new Collection([
-    ['name' => 'John', 'age' => 30],
-    ['name' => 'Alice', 'age' => 25],
-    ['name' => 'Bob', 'age' => 35],
-    ['name' => 'Eve', 'age' => 28],
-]);
+// try {
 
-// $filteredCollection = $collection->filter(function ($item) {
-//     return $item['age'] >= 30;
-// });
+//     $collection = new Collection([
+//         ['name' => 'John', 'age' => 30],
+//         ['name' => 'Alice', 'age' => 25],
+//         ['name' => 'Bob', 'age' => 35],
+//         ['name' => 'Eve', 'age' => 28],
+//     ]);
 
-$filteredCollection = $collection->sortBy("age");
+//     // $filteredCollection = $collection->filter(function ($item) {
+//     //     return $item['age'] >= 30;
+//     // });
 
-echo "<pre>";
-print_r($collection);
-print_r($filteredCollection->toArray());
-echo "</pre>";
+//     $filteredCollection = $collection->sortByDesc("name");
+
+//     echo "<pre>";
+//     print_r($collection);
+//     print_r($filteredCollection->toArray());
+//     echo "</pre>";
 
 
-die();
+// } catch (\Exception $e) {
+//     // wp_die($e->getMessage(), "Something went wrong" );
+
+//     throw $e;
+// }
